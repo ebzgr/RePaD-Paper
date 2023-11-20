@@ -1,2 +1,2 @@
 # RePaD_Paper
- Codes for "A Recursive Partitioning Approach for DynamicDiscrete Choice Modeling in High Dimensional Settings"
+ Codes for "A Recursive Partitioning Approach for Dynamic Discrete Choice Models in High Dimensional Settings"
