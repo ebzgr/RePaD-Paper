@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 
-pd.set_option('max_columns', 100)
-pd.set_option('max_rows', 100)
 
 def get_simulation_statistics(sim_res):
     df = None

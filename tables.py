@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
-import utility as utl
 import simulation_utility as sutl
-import pdb
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -14,7 +12,7 @@ def sim1_alt_result():
     for diff_rep_cost in [True,False]:
         for ml_tr_mode in [True, False]:
             for q_trans_mod in [1,2,3]:
-                df = pd.read_pickle('data/sim1_alt/res_{}_{}_{}.pickle'.format(q_trans_mod, ml_tr_mode*1, diff_rep_cost*1))[[2,5,9,15]]
+                df = pd.read_pickle('data/simulation1_results/res_{}_{}_{}.pickle'.format(q_trans_mod, ml_tr_mode*1, diff_rep_cost*1))[[2,5,9,15]]
                 df = pd.DataFrame(data = np.concatenate(df.values.flatten()).reshape(-1,4))
                 res1.loc[len(res1)] = [diff_rep_cost*1, ml_tr_mode*1, q_trans_mod] + df.mean().round(3).tolist()
                 
@@ -236,3 +234,5 @@ def total_split_table(N, dim_active_q, expname):
     fig.savefig("total_split_hist.png")        
     
     return splits, f_dc
+
+print(sim1_alt_result())

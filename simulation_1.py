@@ -1,14 +1,13 @@
 import numpy as np
 import pandas as pd
-import data_generator as dag
-import discretizer as dis
-import utility as utl
-import pdb
-import estimator as st
+import RePad.data_generator as dag
+import RePad.discretizer as dis
+import RePad.utility as utl
+import RePad.estimator as st
 from joblib import Parallel, delayed
 import time
 
-foldername = 'sim1_alt1'
+foldername = 'simulation1_results'
 
 def simulation_1_single_run(data_gen, buses, periods, dim_q, q_trans_mod, ml_tr_mode, diff_rep_cost, k):
     train_df = data_gen.generate(buses=buses, periods=periods)
@@ -54,14 +53,14 @@ def monte_carlo(data_gen, buses, periods, dim_q, N, q_trans_mod, ml_tr_mode, dif
     df.to_pickle('data/{}/res_{}_{}_{}.pickle'.format(foldername, q_trans_mod, ml_tr_mode*1, diff_rep_cost*1)) 
 
 
-def simulation(seed=123):
+def simulation():
     dim_q = 10
     max_q = 10
     buses = 400
     periods = 100
     N = 100
     mileage_coefficient = -0.2
-    np.random.seed(seed)
+
     
     # Generating the data given a partitioning
     partitions = pd.DataFrame(columns = ['state','q_0_min','q_0_max','q_1_min','q_1_max'])
@@ -91,4 +90,6 @@ def simulation(seed=123):
                                                     max_q=max_q, dim_q=dim_q, discounting_factor=0.9)
                 monte_carlo(data_gen, buses, periods, dim_q, N, q_trans_mod, ml_tr_mode, diff_rep_cost, parallel=True)
 
-#tmp = simulation(seed = 123)
+
+np.random.seed(0)
+tmp = simulation()
